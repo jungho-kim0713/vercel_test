@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>마음 한 장 | 온라인 롤링페이퍼</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span aria-hidden="true">✿</span> 마음 한 장</a>
+    <button id="share" class="button quiet" type="button">링크 복사</button>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <div>
+        <p class="eyebrow">온라인 롤링페이퍼</p>
+        <h1 id="title">우리 반 롤링페이퍼</h1>
+        <p class="subtitle">한 사람을 위해, 우리 마음을 한 장씩.</p>
+      </div>
+      <button id="write" class="button primary" type="button" disabled><span aria-hidden="true">＋</span> 롤링페이퍼 쓰기</button>
+    </section>
+    <div class="workspace">
+      <section class="paper panel" aria-label="롤링페이퍼">
+        <div class="paper-bar">
+          <div id="pages" class="pages" aria-label="페이지 선택"></div>
+          <button id="download" class="button quiet" type="button" disabled>PNG 저장</button>
+        </div>
+        <div id="viewport" class="viewport">
+          <div id="stage" class="stage">
+            <canvas id="board" aria-hidden="true"></canvas>
+            <div id="card-buttons"></div>
+          </div>
+        </div>
+        <div class="paper-footer">
+          <span id="count">롤링페이퍼를 불러오는 중이에요.</span>
+          <button id="delete-page" class="text-button" type="button" disabled>페이지 삭제</button>
+        </div>
+      </section>
+      <aside class="settings panel" aria-labelledby="settings-title">
+        <h2 id="settings-title">꾸미기</h2>
+        <fieldset id="settings-fields" disabled>
+          <form id="title-form">
+            <label for="title-input">롤링페이퍼 제목</label>
+            <div class="field-row">
+              <input id="title-input" name="title" maxlength="45" required>
+              <button class="button quiet" type="submit">저장</button>
+            </div>
+          </form>
+          <div class="setting">
+            <p class="field-label">받는 사람</p>
+            <button id="recipient" class="button recipient-button" type="button">이름과 카드 꾸미기 <span aria-hidden="true">✎</span></button>
+          </div>
+          <div class="setting">
+            <p class="field-label" id="shape-label">카드 배치</p>
+            <div id="shapes" class="shapes" role="group" aria-labelledby="shape-label">
+              <button type="button" data-shape="spiral"><span aria-hidden="true">◎</span>회오리</button>
+              <button type="button" data-shape="star"><span aria-hidden="true">☆</span>별</button>
+              <button type="button" data-shape="cloud"><span aria-hidden="true">☁</span>구름</button>
+            </div>
+          </div>
+          <div class="setting">
+            <p class="field-label">페이지 배경</p>
+            <div class="background-options">
+              <label class="swatch-label"><input id="background-color" type="color" value="#fbf8fd"> 색상</label>
+              <label class="button quiet upload" for="background-image">이미지 추가</label>
+              <input id="background-image" class="visually-hidden" type="file" accept="image/*" aria-label="배경 이미지 선택">
+            </div>
+            <button id="remove-image" class="text-button" type="button" hidden>배경 이미지 지우기</button>
+          </div>
+        </fieldset>
+      </aside>
+    </div>
+    <p id="status" class="status" role="status"></p>
+  </main>
+  <dialog id="editor" aria-labelledby="editor-title">
+    <form id="editor-form">
+      <div class="dialog-heading">
+        <h2 id="editor-title"></h2>
+        <button id="close-editor" class="button quiet" type="button" aria-label="닫기">×</button>
+      </div>
+      <label id="name-label" for="card-name">내 이름</label>
+      <input id="card-name" name="name" maxlength="25" required>
+      <div id="message-field">
+        <label for="card-message">메시지</label>
+        <textarea id="card-message" name="message" rows="3" maxlength="180"></textarea>
+      </div>
+      <div id="card-preview" class="card-preview" aria-hidden="true"></div>
+      <div class="design-fields">
+        <label>폰트 <select name="font"><option value="sans">고딕</option><option value="serif">명조</option><option value="mono">고정폭</option></select></label>
+        <label>글씨 크기 <input name="size" type="number" min="12" max="28" required></label>
+        <label>카드 모양 <select name="form"><option value="round">둥근 카드</option><option value="square">네모 카드</option><option value="ticket">티켓</option></select></label>
+        <label>테두리 디자인 <select name="border"><option value="solid">실선</option><option value="dashed">파선</option><option value="dotted">점선</option><option value="none">없음</option></select></label>
+        <label>글씨 색 <input name="ink" type="color"></label>
+        <label>카드 색 <input name="color" type="color"></label>
+        <label>테두리 색 <input name="borderColor" type="color"></label>
+      </div>
+      <p id="editor-error" class="error" role="alert"></p>
+      <button id="save-card" class="button primary" type="submit">카드 저장</button>
+    </form>
+  </dialog>
+</body>
+</html>
